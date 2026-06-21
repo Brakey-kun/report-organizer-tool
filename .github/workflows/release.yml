@@ -37,5 +37,8 @@ jobs:
         with:
           files: |
             release/*.exe
+            release/*.exe.blockmap
             release/*.dmg
             release/*.zip
+            release/latest.yml
+            release/latest-mac.yml
