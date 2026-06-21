@@ -329,23 +329,30 @@ export default function OrganizeStep({
       )}
 
       {/* Left side: Main UI */}
-      <div className="w-1/2 h-full overflow-y-auto py-12 px-6 lg:px-12 border-r border-gray-200 scrollbar-hide">
-        <div className="max-w-xl mx-auto space-y-8">
+      <div className="w-2/5 h-full overflow-y-auto py-8 px-8 lg:px-10 border-r border-gray-200 scrollbar-hide">
+        <div className="space-y-8">
           
-          <div className="text-center relative">
-            <button 
-              onClick={() => setShowHistory(true)}
-              className="absolute left-0 top-0 p-2 text-gray-400 hover:text-primary-600 bg-white rounded-lg border border-gray-200 shadow-sm transition-colors flex items-center gap-2 text-sm font-medium"
-            >
-              <History size={16}/> History
-            </button>
-            <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight mb-4">
-              Report Organizer / منسق التقارير
-            </h1>
-            <p className="text-base text-gray-600 max-w-lg mx-auto">
+          <div className="space-y-4">
+            <div className="flex items-start justify-between gap-4">
+              <button 
+                onClick={() => setShowHistory(true)}
+                className="p-2 text-gray-400 hover:text-primary-600 bg-white rounded-lg border border-gray-200 shadow-sm transition-colors flex items-center gap-2 text-sm font-medium shrink-0"
+              >
+                <History size={16}/> History
+              </button>
+              <div className="flex-1 text-center">
+                <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
+                  Report Organizer
+                </h1>
+                <p className="text-base text-gray-500 mt-1" dir="rtl">منسق التقارير</p>
+              </div>
+              {/* Invisible spacer to balance centering */}
+              <div className="w-[100px] shrink-0" />
+            </div>
+            <p className="text-base text-gray-600 max-w-lg mx-auto text-center">
               Upload PDFs, HTMLs, or DOCX files. Files marked as <FileBadge className="inline text-primary-500 mb-1" size={16}/> Headers will stay at the top. The rest are auto-sorted chronologically.
             </p>
-            <p className="text-sm text-gray-500 mt-2" dir="rtl">
+            <p className="text-sm text-gray-500 text-center" dir="rtl">
               قم بتحميل ملفات PDF أو HTML أو DOCX. يتم وضع الملفات المحددة كغلاف في المقدمة، ويتم ترتيب الباقي زمنياً.
             </p>
           </div>

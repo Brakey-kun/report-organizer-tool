@@ -15,7 +15,7 @@ const STEPS: { step: WizardStep; label: string; arabic: string }[] = [
 export default function ProgressBar({ currentStep, onStepClick }: ProgressBarProps) {
   return (
     <div className="w-full bg-white border-b border-gray-200 shrink-0" style={{ height: 60 }}>
-      <div className="flex items-center justify-center h-full max-w-xl mx-auto px-6">
+      <div className="flex items-center justify-center h-full max-w-2xl mx-auto px-8">
         {STEPS.map((s, i) => {
           const isCompleted = s.step < currentStep;
           const isCurrent = s.step === currentStep;
