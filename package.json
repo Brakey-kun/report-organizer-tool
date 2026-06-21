@@ -25,7 +25,8 @@
       "electron/**/*"
     ],
     "mac": {
-      "target": "dmg"
+      "target": "dmg",
+      "icon": "icon.png"
     },
     "win": {
       "target": "nsis",
