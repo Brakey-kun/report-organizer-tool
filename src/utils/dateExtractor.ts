@@ -1,9 +1,5 @@
-import * as pdfjsLib from 'pdfjs-dist';
-import pdfWorkerUrl from 'pdfjs-dist/build/pdf.worker.mjs?url';
+import { pdfjsLib } from './pdfWorkerSetup';
 import mammoth from 'mammoth';
-
-// Set worker source for pdfjs locally via Vite
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfWorkerUrl;
 
 const MONTHS_FR = [
   'janvier', 'février', 'mars', 'avril', 'mai', 'juin',
@@ -58,6 +54,7 @@ async function extractTextFromPDF(file: File): Promise<string> {
     for (let i = 1; i <= numPages; i++) {
       const page = await pdf.getPage(i);
       const textContent = await page.getTextContent();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const pageText = textContent.items.map((item: any) => item.str).join(' ');
       fullText += pageText + '\n';
     }
@@ -88,7 +85,7 @@ export function findDateInText(rawText: string): Date | null {
   const normalizedText = text.replace(/\s+/g, ' ');
 
   // 1. Try DD/MM/YYYY or DD-MM-YYYY
-  const dateRegex1 = /\b(\d{1,2})[\/\-\.](\d{1,2})[\/\-\.](\d{4})\b/;
+  const dateRegex1 = /\b(\d{1,2})[/\-.](\d{1,2})[/\-.](\d{4})\b/;
   const match1 = normalizedText.match(dateRegex1);
   if (match1) {
     const day = parseInt(match1[1]);
@@ -100,7 +97,7 @@ export function findDateInText(rawText: string): Date | null {
   }
 
   // 2. Try YYYY-MM-DD
-  const dateRegex2 = /\b(\d{4})[\/\-\.](\d{1,2})[\/\-\.](\d{1,2})\b/;
+  const dateRegex2 = /\b(\d{4})[/\-.](\d{1,2})[/\-.](\d{1,2})\b/;
   const match2 = normalizedText.match(dateRegex2);
   if (match2) {
     const year = parseInt(match2[1]);
