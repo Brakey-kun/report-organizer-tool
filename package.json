@@ -32,7 +32,8 @@
       "icon": "icon.ico"
     },
     "linux": {
-      "target": "AppImage"
+      "target": "AppImage",
+      "icon": "icon.png"
     }
   },
   "dependencies": {
