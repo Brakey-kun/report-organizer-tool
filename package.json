@@ -3,7 +3,7 @@
   "description": "A robust desktop tool for organizing and merging PDF and DOCX reports.",
   "author": "Open Source",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "main": "electron/main.js",
   "scripts": {

@@ -12,7 +12,7 @@ export default function DocumentPreview(props: DocumentPreviewProps) {
   const { activePreview, lockedPreview, activePreviewPdfUrl, onUnlock } = props;
 
   return (
-    <div className="w-3/5 h-full bg-gray-200 border-l border-gray-300 relative shadow-inner">
+    <div className="flex-1 min-w-0 h-full bg-gray-50 border-l border-gray-200 relative">
       {activePreview ? (
         <div className="w-full h-full flex flex-col bg-white">
           <div className="p-4 border-b border-gray-200 bg-gray-50 shadow-sm z-10 flex justify-between items-center">

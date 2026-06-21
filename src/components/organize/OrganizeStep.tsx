@@ -329,39 +329,34 @@ export default function OrganizeStep({
       )}
 
       {/* Left side: Main UI */}
-      <div className="w-2/5 h-full overflow-y-auto py-8 px-8 lg:px-10 border-r border-gray-200 scrollbar-hide">
-        <div className="space-y-8">
+      <div className="w-[38%] min-w-0 h-full overflow-y-auto py-[clamp(1rem,2vw,2rem)] px-[clamp(1rem,2vw,1.5rem)] border-r border-gray-200 scrollbar-hide">
+        <div className="space-y-[clamp(1rem,2vw,1.5rem)]">
           
-          <div className="space-y-4">
-            <div className="flex items-start justify-between gap-4">
+          <div className="space-y-2">
+            <div className="flex items-center justify-between gap-2">
+              <h1 className="text-[clamp(1.1rem,2vw,1.5rem)] font-bold text-gray-900 tracking-tight whitespace-nowrap">
+                Report Organizer
+              </h1>
               <button 
                 onClick={() => setShowHistory(true)}
-                className="p-2 text-gray-400 hover:text-primary-600 bg-white rounded-lg border border-gray-200 shadow-sm transition-colors flex items-center gap-2 text-sm font-medium shrink-0"
+                className="p-1.5 text-gray-400 hover:text-primary-600 bg-white rounded-lg border border-gray-200 shadow-sm transition-colors flex items-center gap-1.5 text-xs font-medium shrink-0"
               >
-                <History size={16}/> History
+                <History size={14}/> History
               </button>
-              <div className="flex-1 text-center">
-                <h1 className="text-3xl font-extrabold text-gray-900 tracking-tight">
-                  Report Organizer
-                </h1>
-                <p className="text-base text-gray-500 mt-1" dir="rtl">منسق التقارير</p>
-              </div>
-              {/* Invisible spacer to balance centering */}
-              <div className="w-[100px] shrink-0" />
             </div>
-            <p className="text-base text-gray-600 max-w-lg mx-auto text-center">
-              Upload PDFs, HTMLs, or DOCX files. Files marked as <FileBadge className="inline text-primary-500 mb-1" size={16}/> Headers will stay at the top. The rest are auto-sorted chronologically.
+            <p className="text-[clamp(0.7rem,1.2vw,0.85rem)] text-gray-600 leading-snug">
+              Upload PDFs, HTMLs, or DOCX files. Files marked as <FileBadge className="inline text-primary-500 mb-0.5" size={12}/> Headers will stay at the top. The rest are auto-sorted chronologically.
             </p>
-            <p className="text-sm text-gray-500 text-center" dir="rtl">
+            <p className="text-[clamp(0.65rem,1vw,0.75rem)] text-gray-500 leading-snug" dir="rtl">
               قم بتحميل ملفات PDF أو HTML أو DOCX. يتم وضع الملفات المحددة كغلاف في المقدمة، ويتم ترتيب الباقي زمنياً.
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
-            <div className="p-6 border-b border-gray-100 bg-gray-50/50">
-              <label className="flex flex-col items-center justify-center w-full h-40 border-2 border-primary-300 border-dashed rounded-xl cursor-pointer bg-primary-50/30 hover:bg-primary-50 transition-colors">
-                <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                  <FileUp className="w-10 h-10 text-primary-500 mb-3" />
+          <div className="bg-white rounded-lg shadow-sm overflow-hidden border border-gray-200">
+            <div className="p-[clamp(0.75rem,1.5vw,1.25rem)] border-b border-gray-100">
+              <label className="flex flex-col items-center justify-center w-full py-[clamp(1rem,2vw,2rem)] border-2 border-primary-300 border-dashed rounded-lg cursor-pointer bg-primary-50/30 hover:bg-primary-50 transition-colors">
+                <div className="flex flex-col items-center justify-center py-2">
+                  <FileUp className="w-8 h-8 text-primary-500 mb-2" />
                   <p className="mb-1 text-sm text-gray-700">
                     <span className="font-semibold text-primary-600">Click to upload</span> or drag and drop
                   </p>
@@ -383,7 +378,7 @@ export default function OrganizeStep({
               )}
             </div>
 
-            <div className="p-6">
+            <div className="p-[clamp(0.75rem,1.5vw,1.25rem)]">
               <div className="flex flex-wrap items-center justify-between mb-6 gap-4">
                 <h2 className="text-lg font-bold text-gray-900">
                   Document Order ({files.length})

@@ -8,8 +8,17 @@ import OrganizeStep from './components/organize/OrganizeStep';
 import GlobalViewerStep from './components/global-viewer/GlobalViewerStep';
 import ExportStep from './components/export/ExportStep';
 
-// Initialize local storage
+// Initialize local storage. The underlying IndexedDB lives in Electron's
+// userData directory, which the main process relocates to
+// Documents/report-organiser-data so history persists permanently.
 const SESSIONS_STORAGE_KEY = 'report_organizer_sessions';
+
+localforage.config({
+  driver: localforage.INDEXEDDB,
+  name: 'report-organiser-data',
+  storeName: 'sessions',
+  description: 'Persistent storage for Report Organizer session history',
+});
 
 export default function App() {
   const [currentStep, setCurrentStep] = useState<WizardStep>(1);
@@ -25,6 +34,10 @@ export default function App() {
   const [isMerging, setIsMerging] = useState(false);
   const [mergeProgress, setMergeProgress] = useState(0);
 
+  // Guards against persisting the empty initial state before the saved
+  // sessions have been loaded from storage on startup.
+  const hasLoadedSessions = useRef(false);
+
   // Load sessions on mount
   useEffect(() => {
     const loadSavedSessions = async () => {
@@ -35,10 +48,21 @@ export default function App() {
         }
       } catch (err) {
         console.error("Failed to load sessions", err);
+      } finally {
+        hasLoadedSessions.current = true;
       }
     };
     loadSavedSessions();
   }, []);
+
+  // Persist sessions whenever they change (after the initial load completes)
+  useEffect(() => {
+    if (!hasLoadedSessions.current) return;
+
+    localforage.setItem(SESSIONS_STORAGE_KEY, sessions).catch((err) => {
+      console.error("Failed to save sessions", err);
+    });
+  }, [sessions]);
 
   const handleNextToStep2 = async () => {
     setIsMerging(true);
@@ -64,16 +88,16 @@ export default function App() {
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shrink-0">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="bg-primary-600 p-2 rounded-lg">
-              <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div className="w-full px-[clamp(1rem,2vw,2rem)] h-12 flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <div className="bg-primary-600 p-1.5 rounded-md">
+              <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
               </svg>
             </div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900 leading-tight">Report Organizer Tool</h1>
-              <p className="text-xs text-gray-500 font-medium">أداة تنظيم التقارير</p>
+              <h1 className="text-sm font-bold text-gray-900 leading-tight">Report Organizer Tool</h1>
+              <p className="text-[10px] text-gray-500 font-medium leading-tight">أداة تنظيم التقارير</p>
             </div>
           </div>
         </div>

@@ -34,8 +34,8 @@ export default function GlobalViewerStep({
   const totalOriginalPages = virtualPages.filter((p) => p.type === 'original').length;
 
   return (
-    <div className="flex flex-col h-[calc(100vh-140px)] w-full">
-      <div className="flex flex-1 overflow-hidden">
+    <div className="flex flex-col flex-1 min-h-0 w-full">
+      <div className="flex flex-1 overflow-hidden min-h-0">
         <ThumbnailSidebar
           virtualPages={virtualPages}
           selectedPageIndex={selectedPageIndex}
