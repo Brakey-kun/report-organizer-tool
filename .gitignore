@@ -24,5 +24,8 @@ release
 *.sln
 *.sw?
 
-# Scripts
-convert_icon.py
+# Scripts and testing files
+*.py
+__pycache__/
+test*.js
+test*.cjs
